@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rkgenaichatbot-sdk"
+version = "1.0.0"
+description = "Python SDK for the RK Gen AI Chatbot — drop-in integration for any Python project."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Rajat Kumar" }]
+keywords = ["ai", "chatbot", "rag", "llm", "genai", "sdk"]
+dependencies = [
+    "httpx>=0.25",
+]
+
+[project.optional-dependencies]
+async = ["httpx[asyncio]>=0.25"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rkgenaichatbot*"]
