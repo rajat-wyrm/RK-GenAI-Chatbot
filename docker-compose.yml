@@ -1,0 +1,17 @@
+services:
+  chatbot:
+    build: .
+    container_name: rk-gen-ai-chatbot
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./rk-core/.env
+    volumes:
+      - ./rk-core/data:/app/rk-core/data
+      - ./rk-core/knowledge_base:/app/rk-core/knowledge_base
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx, sys; sys.exit(0 if httpx.get('http://127.0.0.1:5000/api/health', timeout=5).status_code == 200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
